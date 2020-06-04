@@ -1,3 +1,70 @@
+#latihan 2a#
+SELECT * FROM jurnal2019;
+
+#latihan 2b#
+SELECT NO_BUKTI, KODE_AKUN, DEBET, KETERANGAN FROM JURNAL2019;
+SELECT TGL, NO_BUKTI, KODE_AKUN, KREDIT FROM JURNAL2019;
+
+#latihan 3a#
+SELECT * FROM JURNAL2019 WHERE No_BUKTI = 'JV 0123';
+
+#latihan 3b#
+SELECT * FROM JURNAL2019 WHERE KETERANGAN LIKE '%jamuan%';
+
+#latihan 4a#
+SELECT
+SUM(DEBET) AS JDEBET,
+SUM(KREDIT) AS JKREDIT
+FROM JURNAL2019;
+
+#latihan 4b#
+SELECT
+avg(DEBET) AS aDEBET,
+avg(KREDIT) AS aKREDIT
+FROM jurnal2019
+WHERE KETERANGAN LIKE '%listrik%';
+
+#latihan 4c#
+SELECT
+count(DEBET) AS cDEBET,
+count(KREDIT) AS cKREDIT
+FROM jurnal2019
+WHERE KETERANGAN LIKE '%listrik%';
+
+#latihan 4d
+SELECT
+KODE_AKUN,
+SUM(DEBET) AS JDEBET,
+SUM(KREDIT) AS JKREDIT
+FROM JURNAL2019
+GROUP BY KODE_AKUN;
+
+#latihan 4e
+SELECT
+KODE_AKUN,
+SUM(DEBET) AS JDEBET,
+SUM(KREDIT) AS JKREDIT
+FROM JURNAL2019
+GROUP BY no_bukti;
+
+#Latihan 5A
+SELECT a.TGL, a.NO_BUKTI, a.KODE_AKUN, b.nama_akun, a.DEBET, a.KREDIT, a.KETERANGAN
+FROM JURNAL2019 AS a LEFT JOIN BAGAN_AKUN AS b
+ON a.KODE_AKUN = b.KODE;
+
+#5b
+SELECT a.kode_akun, b.kode, b.nama_akun,
+SUM(debet) AS JDEBET, SUM(kredit) AS JKREDIT
+FROM jurnal2019 AS a INNER JOIN bagan_akun AS b
+ON a.kode_akun = b.kode
+GROUP BY a.kode_akun;
+
+#5c
+SELECT
+a.no_do, a.kode_produk, b.nama_produk, a.harga_satuan, a.quantity, a.discount, a.total
+FROM sales_detail AS a INNER JOIN produk_master AS b
+ON a.kode_produk = b.kode_produk;
+
 #5A
 SELECT a.TGL, a.NO_BUKTI, a.KODE_AKUN, b.nama_akun, a.DEBET, a.KREDIT, a.KETERANGAN
 FROM JURNAL2019 AS a LEFT JOIN BAGAN_AKUN AS b
