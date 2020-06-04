@@ -1,30 +1,30 @@
-#latihan 2a#
+#latihan 2a
 SELECT * FROM jurnal2019;
 
-#latihan 2b#
+#latihan 2b
 SELECT NO_BUKTI, KODE_AKUN, DEBET, KETERANGAN FROM JURNAL2019;
 SELECT TGL, NO_BUKTI, KODE_AKUN, KREDIT FROM JURNAL2019;
 
-#latihan 3a#
+#latihan 3a
 SELECT * FROM JURNAL2019 WHERE No_BUKTI = 'JV 0123';
 
-#latihan 3b#
+#latihan 3b
 SELECT * FROM JURNAL2019 WHERE KETERANGAN LIKE '%jamuan%';
 
-#latihan 4a#
+#latihan 4a
 SELECT
 SUM(DEBET) AS JDEBET,
 SUM(KREDIT) AS JKREDIT
 FROM JURNAL2019;
 
-#latihan 4b#
+#latihan 4b
 SELECT
 avg(DEBET) AS aDEBET,
 avg(KREDIT) AS aKREDIT
 FROM jurnal2019
 WHERE KETERANGAN LIKE '%listrik%';
 
-#latihan 4c#
+#latihan 4c
 SELECT
 count(DEBET) AS cDEBET,
 count(KREDIT) AS cKREDIT
@@ -83,4 +83,17 @@ a.no_do, a.kode_produk, b.nama_produk, a.harga_satuan, a.quantity, a.discount, a
 FROM sales_detail AS a INNER JOIN produk_master AS b
 ON a.kode_produk = b.kode_produk;
 
-#5d
+
+#Latihan 6a
+SELECT
+DAY('2020-06-15') hari,
+MONTH(' 2020-06-15 ') bulan,
+YEAR(' 2020-06-15 ') tahun;
+
+#latihan6b
+SELECT
+month(tgl) Bulan,
+SUM(DEBET) AS JDEBET,
+SUM(KREDIT) AS JKREDIT
+FROM JURNAL2019
+GROUP BY MONTH(tgl);
