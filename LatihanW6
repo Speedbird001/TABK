@@ -1,37 +1,37 @@
-#latihan 2a
+#latihan 2a [Memilih semua Field/Kolom]
 SELECT * FROM jurnal2019;
 
-#latihan 2b
+#latihan 2b [memilih beberapa kolom saja]
 SELECT NO_BUKTI, KODE_AKUN, DEBET, KETERANGAN FROM JURNAL2019;
 SELECT TGL, NO_BUKTI, KODE_AKUN, KREDIT FROM JURNAL2019;
 
-#latihan 3a
+#latihan 3a [memilih baris tertentu saja]
 SELECT * FROM JURNAL2019 WHERE No_BUKTI = 'JV 0123';
 
-#latihan 3b
+#latihan 3b [“%” dan LIKE]
 SELECT * FROM JURNAL2019 WHERE KETERANGAN LIKE '%jamuan%';
 
-#latihan 4a
+#latihan 4a [Menjumlahkan Saldo Debet & Kredit]
 SELECT
 SUM(DEBET) AS JDEBET,
 SUM(KREDIT) AS JKREDIT
 FROM JURNAL2019;
 
-#latihan 4b
+#latihan 4b [Nilai rata-rata pembayaran biaya listrik, air, gas dan telepon]
 SELECT
 avg(DEBET) AS aDEBET,
 avg(KREDIT) AS aKREDIT
 FROM jurnal2019
 WHERE KETERANGAN LIKE '%listrik%';
 
-#latihan 4c
+#latihan 4c [Hitung banyaknya transaksi pembelian kredit]
 SELECT
 count(DEBET) AS cDEBET,
 count(KREDIT) AS cKREDIT
 FROM jurnal2019
 WHERE KETERANGAN LIKE '%listrik%';
 
-#latihan 4d
+#latihan 4d [menghitung jumlah kolom Debet dan kolom Kredit yang dikelompokkan per Kode Akun]
 SELECT
 KODE_AKUN,
 SUM(DEBET) AS JDEBET,
@@ -39,7 +39,7 @@ SUM(KREDIT) AS JKREDIT
 FROM JURNAL2019
 GROUP BY KODE_AKUN;
 
-#latihan 4e
+#latihan 4e [query untuk menghitung jumlah kolom Debet dan kolom Kredit yang dikelompokkan per Nomor Bukti]
 SELECT
 KODE_AKUN,
 SUM(DEBET) AS JDEBET,
@@ -47,50 +47,31 @@ SUM(KREDIT) AS JKREDIT
 FROM JURNAL2019
 GROUP BY no_bukti;
 
-#Latihan 5A
+#Latihan 5A [Join Tabel]
 SELECT a.TGL, a.NO_BUKTI, a.KODE_AKUN, b.nama_akun, a.DEBET, a.KREDIT, a.KETERANGAN
 FROM JURNAL2019 AS a LEFT JOIN BAGAN_AKUN AS b
 ON a.KODE_AKUN = b.KODE;
 
-#5b
+#5b [Inner Join]
 SELECT a.kode_akun, b.kode, b.nama_akun,
 SUM(debet) AS JDEBET, SUM(kredit) AS JKREDIT
 FROM jurnal2019 AS a INNER JOIN bagan_akun AS b
 ON a.kode_akun = b.kode
 GROUP BY a.kode_akun;
 
-#5c
+#5c [Menambahkan Nama Produk dari Tabel PRODUK_MASTER pada Tabel SALES_DETAIL]
 SELECT
 a.no_do, a.kode_produk, b.nama_produk, a.harga_satuan, a.quantity, a.discount, a.total
 FROM sales_detail AS a INNER JOIN produk_master AS b
 ON a.kode_produk = b.kode_produk;
 
-#5A
-SELECT a.TGL, a.NO_BUKTI, a.KODE_AKUN, b.nama_akun, a.DEBET, a.KREDIT, a.KETERANGAN
-FROM JURNAL2019 AS a LEFT JOIN BAGAN_AKUN AS b
-ON a.KODE_AKUN = b.KODE;
-
-#5b
-SELECT a.kode_akun, b.kode, b.nama_akun,
-SUM(debet) AS JDEBET, SUM(kredit) AS JKREDIT
-FROM jurnal2019 AS a INNER JOIN bagan_akun AS b
-ON a.kode_akun = b.kode
-GROUP BY a.kode_akun;
-
-#5c
-SELECT
-a.no_do, a.kode_produk, b.nama_produk, a.harga_satuan, a.quantity, a.discount, a.total
-FROM sales_detail AS a INNER JOIN produk_master AS b
-ON a.kode_produk = b.kode_produk;
-
-
-#Latihan 6a
+#Latihan 6a [DAY, WEEK, MONTH, YEAR, WEEKDAY]
 SELECT
 DAY('2020-06-15') hari,
 MONTH(' 2020-06-15 ') bulan,
 YEAR(' 2020-06-15 ') tahun;
 
-#latihan6b
+#latihan6b [Kolom pertama berisi bulan ke-n, jumlah DEBET, dan Jumlah KREDIT]
 SELECT
 month(tgl) Bulan,
 SUM(DEBET) AS JDEBET,
